@@ -47,17 +47,14 @@ def generate_normal_distribution_mk2(N, R, r_0):
     #N - Number of particles on the system
     #r_0 - Individual exclusion radius
     #R - Radius of area where the partciles should be placed   
-    
     #Creates coordinates x and y
     particle_x = []
     particle_y = []
-    
     #Tree contains all the particles inside, which are gonna be used for check if those new candidates are within exlusion radius or not
     tree = None
-
     #Check if the number of particles match the desirable N
     while len(particle_x) < N:
-        r = np.random.uniform(0, R)
+        r = np.sqrt(np.random.uniform(0, R**2))
         theta = np.random.uniform(0, 2*np.pi)
         x,y = r*np.cos(theta),r*np.sin(theta)
         #Check first if the candidate coordinates are whitin exclusion radius for any particle inside the tree
@@ -96,8 +93,8 @@ def generate_normal_distribution_mk3(N, rho, r_0):
 def plot_particles(R,particle_x,particle_y,N,r_0):
     plt.figure(figsize=(8, 8))
     plt.scatter(particle_x,particle_y, s=10)
-    plt.xlim(0, R)
-    plt.ylim(0, R)
+    plt.xlim(-R, R)
+    plt.ylim(-R, R)
     plt.gca().set_aspect('equal', adjustable='box')
     plt.title(f'N={N}, R={R}, r_0={r_0}')
     plt.xlabel('X-coordinate')
@@ -105,19 +102,3 @@ def plot_particles(R,particle_x,particle_y,N,r_0):
     plt.grid()
     plt.show()
 
-## Parameters
-#
-## Number of particles
-#N = 2000
-## Exclusion radius
-#r_0 = 0.0  
-## System's density
-#rho=1
-#L = np.sqrt(N/rho)
-## Generate particle positions
-##N, R, r_0 = gen_radius(N,rho,r_0) #Needed for mk1 and mk2 versions
-#start_time = time.time()
-#particle_x, particle_y = generate_normal_distribution_mk3(N, rho, r_0)
-#particles = list(zip(particle_x, particle_y))
-#print(f"{N}"+"--- %s seconds ---" % (time.time() - start_time))
-#plot_particles(L,particle_x,particle_y,N,r_0)

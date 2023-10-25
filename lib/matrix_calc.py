@@ -8,8 +8,10 @@ def light_par(mat,Gamma_0):
     mat = H0(mat)
     #Correct the value for the main diagonal
     fill_diagonal(mat, 1)
-    mat = mat*(-Gamma_0/2)
+    #mat = mat*(-Gamma_0/2)
     return mat
+
+
 
 def light_perp(mat,particles,Gamma_1,N):
     #Perform Hankel function for all the matrix
